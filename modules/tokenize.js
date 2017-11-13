@@ -9,6 +9,7 @@ import isEmpty from './isEmpty'
 export default function tokenize(
   input: string,
   ruleMap: RuleMap,
+  defaultTokenType?: string,
   tokens: Array<Token> = [],
   startIndex: number = 0
 ): Array<Token> {
@@ -30,11 +31,28 @@ export default function tokenize(
   // we have encountered invalid syntax
   // and thus can throw a syntax error
   if (ruleEndIndex === 0) {
+    if (defaultTokenType) {
+      const nextStartIndex = startIndex + 1
+
+      tokens.push({
+        type: defaultTokenType,
+        value: input.substring(0, 1),
+        start: startIndex,
+        end: nextStartIndex
+      })
+
+      return tokenize(
+        input.substring(1),
+        ruleMap,
+        defaultTokenType,
+        tokens,
+        nextStartIndex
+      )
+    }
+
     throw new SyntaxError(
-      `Invalid Token: "${input.substr(
-        0,
-        Math.min(15, input.length)
-      )}..."\n"${input[0]}" does not match any rules.`
+      `${input.substr(0, 15)}... (Invalid Token:${startIndex})
+             ^ does not match any rules.`
     )
   }
 
@@ -53,6 +71,7 @@ export default function tokenize(
   return tokenize(
     input.substring(ruleEndIndex),
     ruleMap,
+    defaultTokenType,
     tokens,
     nextStartIndex
   )

@@ -1,35 +1,28 @@
 {
   "name": "tokenize-sync",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple synchronous string tokenizer using Regex",
   "main": "lib/tokenize.js",
   "scripts": {
     "babel": "rimraf lib && babel -d lib modules",
-    "check": "npm run format && npm run lint && npm run flow && npm run test:coverage",
+    "check":
+      "npm run format && npm run lint && npm run flow && npm run test:coverage",
     "flow": "flow modules",
-    "format": "prettier --single-quote --no-semi --jsx-bracket-same-line --write \"modules/**/*.js\"",
+    "format":
+      "prettier --single-quote --no-semi --jsx-bracket-same-line --write \"modules/**/*.js\"",
     "lint": "eslint modules",
     "release": "npm run check && npm run babel && npm publish",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "lib/"
-  ],
+  "files": ["LICENSE", "README.md", "lib/"],
   "repository": "https://github.com/rofrischmann/tokenize-sync",
   "author": "Robin Frischmann",
   "license": "MIT",
   "jest": {
     "rootDir": "modules"
   },
-  "keywords": [
-    "tokenizer",
-    "parser",
-    "compiler",
-    "tokenize"
-  ],
+  "keywords": ["tokenizer", "parser", "compiler", "tokenize"],
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",

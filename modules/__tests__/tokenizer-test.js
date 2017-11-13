@@ -54,4 +54,23 @@ describe('Tokenizing strings', () => {
       }
     ])
   })
+
+  it('should use a defaultTokenType', () => {
+    expect(tokenize('test $$', ruleMap, 'unknown')).toEqual([
+      { type: 'identifier', value: 'test', start: 0, end: 4 },
+      { type: 'whitespace', value: ' ', start: 4, end: 5 },
+      {
+        type: 'unknown',
+        value: '$',
+        start: 5,
+        end: 6
+      },
+      {
+        type: 'unknown',
+        value: '$',
+        start: 6,
+        end: 7
+      }
+    ])
+  })
 })
